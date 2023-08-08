@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Quiz Results</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="mt-4">Quiz Results</h1>
+  <p class="lead">User: <span th:text="${userName}"></span></p>
+  <p class="lead">Your final score is: <span th:text="${score}"></span> /10</p>
+
+  <hr class="my-4">
+
+  <h2 class="mt-4">Questions and Answers:</h2>
+  <div th:each="question, questionIndex : ${questions}" class="mb-4">
+    <!-- Use Bootstrap Card Component -->
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Question [[${questionIndex.index + 1}]]</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">[[${question.questionText}]]</p>
+        <!-- Display the user's selected answer -->
+        <p class="card-text">Your Answer: <span th:text="${selectedAnswers[question.questionId]}"></span></p>
+        <!-- Display the correct answer fetched from the database -->
+        <p class="card-text">Correct Answer: [[${correctAnswers[question.questionId]}]]</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="my-4">
+</div>
+
+<!-- Add this inside your <body> element -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="imageModalLabel">Hi there</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Image placeholder -->
+        <img src="" id="modalImage" class="img-fluid" alt="Image">
+        <!-- Text placeholder -->
+        <div id="modalText"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Include Bootstrap JS and jQuery (required for some Bootstrap components) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- JavaScript code to show the modal with dynamic content on page load -->
+<script>
+  $(document).ready(function() {
+    // Show the modal when the page is ready
+    $('#imageModal').modal('show');
+
+    // Retrieve the user's score using Thymeleaf syntax
+    let userScore = parseInt("${score}");
+
+    // Switch case to set modal content based on the user's score
+    switch (userScore) {
+      case 0:
+        $('#modalImage').attr('src', '/zero.jpg');
+        $('#modalText').text('Congratulations! You scored 0.');
+        break;
+      case 1:
+        $('#modalImage').attr('src', '/zero.jpg');
+        $('#modalText').text('Congratulations! You scored 1.');
+        break;
+      case 2:
+        $('#modalImage').attr('src', '/one.jpg');
+        $('#modalText').text('Congratulations! You scored 2.');
+        break;
+      case 3:
+        $('#modalImage').attr('src', '/two.jpg');
+        $('#modalText').text('Congratulations! You scored 3.');
+        break;
+      case 4:
+        $('#modalImage').attr('src', '/three.jpg');
+        $('#modalText').text('Congratulations! You scored 4.');
+        break;
+      case 5:
+        $('#modalImage').attr('src', '/four.jpg');
+        $('#modalText').text('Congratulations! You scored 5.');
+        break;
+      case 6:
+        $('#modalImage').attr('src', '/zero.jpg');
+        $('#modalText').text('Congratulations! You scored 6.');
+        break;
+      case 7:
+        $('#modalImage').attr('src', '/zero.jpg');
+        $('#modalText').text('Congratulations! You scored 7.');
+        break;
+      case 8:
+        $('#modalImage').attr('src', '/zero.jpg');
+        $('#modalText').text('Congratulations! You scored 8.');
+        break;
+      case 9:
+        $('#modalImage').attr('src', '/zero.jpg');
+        $('#modalText').text('Congratulations! You scored 9.');
+        break;
+      case 10:
+        $('#modalImage').attr('src', '/zero.jpg');
+        $('#modalText').text('Perfect score! You scored 10.');
+        break;
+      default:
+        $('#modalImage').attr('src', '/zero.jpg');
+        $('#modalText').text('Your score: ' + userScore);
+        break;
+    }
+  });
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Full Stack 104</title>
+</head>
+<body>
+<h1>Spring and SpringBoot</h1>
+<form action="/submit" method="post">
+  <label for="userName">Your Name:</label>
+  <input type="text" id="userName" name="userName" required><br><br>
+  <p>Time Remaining: <span id="timeCount">10</span> seconds</p>
+  <div th:each="question : ${questions}">
+    <p th:text="${question.questionText}"></p>
+    <input type="radio" th:name="'question_' + ${question.questionId}" th:value="${question.optionA}" required>
+    <label th:text="${question.optionA}"></label><br>
+    <input type="radio" th:name="'question_' + ${question.questionId}" th:value="${question.optionB}">
+    <label th:text="${question.optionB}"></label><br>
+    <input type="radio" th:name="'question_' + ${question.questionId}" th:value="${question.optionC}">
+    <label th:text="${question.optionC}"></label><br>
+    <input type="radio" th:name="'question_' + ${question.questionId}" th:value="${question.optionD}">
+    <label th:text="${question.optionD}"></label><br><br>
+  </div>
+  <button type="submit">Submit Quiz</button>
+</form>
+<!--ADDED TO REACH SCRIPT.JS FILE -->
+<script src="/script.js"></script>
+</body>
+</html>
+
